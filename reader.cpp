@@ -4,24 +4,50 @@
 #include <fstream>
 #include <unordered_map>
 
+struct employeeData {
+    std::string name;
+    std::string employeeType;
+    std::string department = "";
+};
+
 std::unordered_map<std::string, int> map;
-std::unordered_map<std::string, std::string> cross;
+std::unordered_map<std::string, employeeData> cross;
 
 void crosscheck(char* list) {
 
     std::ifstream infile(list);
 
-    std::string uniqname, fullName, remains;
+    std::string uniqname, first, last, employeeType, department, temp, fullName;
 
     while(infile >> uniqname) {
 
-        infile >> fullName;
+        infile >> first >> last >> employeeType;
 
-        getline(infile, remains);
+        fullName = first + " " + last;
 
-        fullName = fullName + remains;
+        if (employeeType == "External") {
 
-        cross[uniqname + "@umich.edu"] = fullName.substr(0, fullName.length() - 1);
+            infile >> temp;
+
+            employeeType = employeeType +  " " + temp;
+
+        }
+
+        infile >> department;
+
+        if (department not_eq "N/A") {
+
+            getline(infile, temp);
+
+            department = department + temp;
+
+        } else {
+
+            department = "";
+
+        }
+
+        cross[uniqname + "@umich.edu"] = {fullName, employeeType, department.substr(0, department.length() - 1)};
 
     }
 
@@ -114,15 +140,19 @@ void fileHandler(char** file) {
 
     crosscheck(file[2]);
 
+    std::cout << "Name\tPoints\tStatus\tDepartment\n";
+
     for (auto const &pair: map) {
 
         if (cross.count(pair.first)) {
 
-            std::cout << cross[pair.first] << ": " << pair.second << "\n";
+            employeeData dat = cross[pair.first];
+
+            std::cout << dat.name << "\t" << pair.second << "\t" << dat.employeeType << "\t" << dat.department << "\n";
 
         } else {
 
-            std::cout << pair.first << ": " << pair.second << "\n";
+            std::cout << pair.first << "\t" << pair.second << "\t \t \n";
 
         }
 
