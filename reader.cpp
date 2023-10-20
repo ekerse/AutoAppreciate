@@ -160,18 +160,18 @@ void fileHandler(char** file) {
 
 }
 
-std::string setMode() {
+// std::string setMode() {
 
-    std::cout << "Select Tally Option:\n[1] Monthly Report\n[2] "
-        << "Quarterly Report\n[3] Custom Report\n[4] All Time Report\n\n";
+//     std::cout << "Select Tally Option:\n[1] Monthly Report\n[2] "
+//         << "Quarterly Report\n[3] Custom Report\n[4] All Time Report\n\n";
 
-    std::string input;
+//     std::string input;
 
-    std::cin >> input;
+//     std::cin >> input;
 
-    return input;
+//     return input;
 
-}
+// }
 
 int main(int argc, char** argv) {
 
