@@ -13,7 +13,7 @@ struct employeeData {
 std::unordered_map<std::string, int> map;
 std::unordered_map<std::string, employeeData> cross;
 
-void crosscheck(char* list) {
+void crosscheck(char* list, int beginMonth, int beginYear, int endMonth, int endYear) {
 
     std::ifstream infile(list);
 
@@ -160,11 +160,48 @@ void fileHandler(char** file) {
 
 }
 
+std::string setMode() {
+
+    std::cout << "Select Tally Option:\n[1] Monthly Report\n[2] "
+        << "Quarterly Report\n[3] Custom Report\n[4] All Time Report\n\n";
+
+    std::string input;
+
+    std::cin >> input;
+
+    return input;
+
+}
+
 int main(int argc, char** argv) {
 
-    //std::cout << argv[0] << " " << argv[1] << '\n';
-
     if (argc != 3) exit(1);
+
+    // std::string mode = setMode();
+
+    // int beginMonth, beginYear, endMonth = -1, endYear;
+
+    // switch (mode) {
+
+    //     case 1:
+
+
+
+    //         break;
+
+    //     case 2:
+
+    //         break;
+
+    //     case 3:
+
+    //         break;
+
+    //     case 4:
+
+    //         break;
+
+    // }
 
     fileHandler(argv);
 
